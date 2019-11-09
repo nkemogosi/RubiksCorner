@@ -1,4 +1,0 @@
-%h1=t('.title')
-%p Find me in app/views/home/home.html.haml
-%marquee{:onMouseOver=>"this.stop();",:onMouseOut=>"this.start();",:scrolldelay=>10, :scrollamount=>4, :behavior=>"scroll"}=t('.welcome')
-<%= line_chart User.group_by_day(:created_at).count %>

@@ -12,10 +12,10 @@
 //= require chartkick
 //= require Chart.bundle
 //= require bootstrap-sprockets
-//= require rails-ujs
+//= require jquery3
+//= require jquery_ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-
-@import bootstrap;
+@import bootstrap;s
 @import bootstrap-sprockets;
