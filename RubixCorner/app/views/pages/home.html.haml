@@ -1,8 +1,9 @@
 %h1=t('.title')
 .stopwatch-container
   .stopwatch-body
-    %h1
+    %h1#timeVal
       %time 00:00:00
-    %button#start +2S
-    %button#start DNF
-    %button#start DELETE
+    %button.plus2Btn +2S
+    %button.dnfBtn DNF
+    %button.delBtn DELETE
+    %button.saveBtn SAVE

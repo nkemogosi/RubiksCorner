@@ -9,13 +9,14 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//= require chartkick
 //= require Chart.bundle
+//= require chartkick
 //= require bootstrap-sprockets
 //= require jquery3
 //= require jquery_ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-@import bootstrap;s
+@import bootstrap;
 @import bootstrap-sprockets;
+@import chartkick;
