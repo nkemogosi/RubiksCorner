@@ -4,7 +4,9 @@
 //x = event.which || event.keyCode;
 $(document).ready(function() {
     var running = false,
-        stopped = true;
+        stopped = true,
+        keyDown = false;
+
     var pastTime = $.now();
     var millsecs = 0,
         secs = 0,
@@ -16,23 +18,39 @@ $(document).ready(function() {
         saveBtn = $(".saveBtn");
     hideBtns();
     $(document).keypress(function(e) {
-
-        if (e.keyCode == 32) {
-            let currentTime = $.now();
-            if (stopped && !running) {
-                pastTime = currentTime;
-            } else if (running) {
-                clearTimeout(t);
-                running = false;
-                stopped = false;
-                showBtns();
+        if(keyDown){
+          return;
+        }
+        if (e.keyCode === 32) {
+          keyDown=true;
+          if(stopped&&!running){
+            if((mins+secs+millsecs)!=0){
+              save();
             }
+            startTimer();
+            stopped=false;
+          }else if(!stopped&&running){
+              startTimer();
+          }
         }
     });
+    function startTimer(){
+      let currentTime = $.now();
+      if (!running) {
+          pastTime = currentTime;
+      } else if (running) {
+          running = false;
+          stopped = true;
+          showBtns();
+          clearTimeout(t);
+      }
+    }
     $(document).keyup(function(e) {
-        if (e.keyCode == 32) {
+        if (e.keyCode === 32) {
+            keyDown=false;
             let currentTime = $.now();
-            if (currentTime - pastTime >= 100 && stopped && !running) {
+
+            if (currentTime - pastTime >= 100  && !running&&!stopped) {
                 running = true;
                 stopwatch();
             }
@@ -60,8 +78,16 @@ $(document).ready(function() {
     }
 
     function resetClock() {
-        location.reload();
-        hideBtns();
+        millsecs = 0;
+        secs  = 0;
+        mins=0;
+        h1.html("00:00:00");
+        running = false;
+        stopped = false;
+        if(delBtn.is(":visible")){
+          hideBtns();
+        }
+
     }
 
     function hideBtns() {
@@ -89,7 +115,9 @@ $(document).ready(function() {
         resetClock();
     }
     delBtn.click(resetClock);
-    saveBtn.click(save);
+    saveBtn.click(function(){
+      save();
+    });
     dnfBtn.click(resetClock);
     plus2Btn.click(resetClock);
 

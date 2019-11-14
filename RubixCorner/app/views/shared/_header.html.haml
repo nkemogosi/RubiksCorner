@@ -22,8 +22,11 @@
         %button.btn.btn-default{:type => "submit"} Submit
       %ul.nav.navbar-nav.navbar-right
         %li
-          %a{:href => "#"} Sign in
+          %a{:href => new_user_session_path} Sign in
         %li
-          %a{:href => "#"} Sign Up
+          %a{:href => new_user_registration_path} Sign Up
+        %li
+          = link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+
     / /.navbar-collapse
   / /.container-fluid
