@@ -7,11 +7,16 @@ background-color: #AAADAE
 }
 
 .stopwatch-container{
-  position: fixed;
-  top: 50%;
-  left: 50%;
+  margin: auto;
+  width: 50%;
+  height: 50%;
   /* bring your own prefixes */
-  transform: translate(-50%, -50%);
+  //transform: translate(-50%, -50%);
+}
+button.btn.btn-info.btn-lg{
+  float:right;
+  vertical-align: text-top;
+  margin: 0 auto;
 }
 
 // .plus2Btn{
