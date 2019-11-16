@@ -5,9 +5,12 @@
 $(document).ready(function() {
     var running = false,
         stopped = true,
-        keyDown = false;
+        keyDown = false,
+        dnf = false,
+        plus2 = false;
 
     var pastTime = $.now();
+    var currentTime = $.now();
     var millsecs = 0,
         secs = 0,
         mins = 0,
@@ -50,7 +53,7 @@ $(document).ready(function() {
             keyDown=false;
             let currentTime = $.now();
 
-            if (currentTime - pastTime >= 100  && !running&&!stopped) {
+            if (currentTime - pastTime >= 1000  && !running&&!stopped) {
                 running = true;
                 stopwatch();
             }
@@ -83,7 +86,8 @@ $(document).ready(function() {
         mins=0;
         h1.html("00:00:00");
         running = false;
-        stopped = false;
+        stopped = true;
+        keyDown = false;
         if(delBtn.is(":visible")){
           hideBtns();
         }
@@ -105,9 +109,9 @@ $(document).ready(function() {
         saveBtn.show();
     }
 
-    function save(dnf = false, plus2 = 0) {
-        if (plus2 == 2) {
-
+    function save() {
+        if (plus) {
+          secs+=2;
         }
         if (dnf) {
 
@@ -115,10 +119,8 @@ $(document).ready(function() {
         resetClock();
     }
     delBtn.click(resetClock);
-    saveBtn.click(function(){
-      save();
-    });
-    dnfBtn.click(resetClock);
+    saveBtn.click(save);
+  //  dnfBtn.click(resetClock);
     plus2Btn.click(resetClock);
 
 

@@ -1,5 +1,5 @@
 .container
-  %button.btn.btn-info.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"} Open Modal
+  %button.btn.btn-info.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"} Settings
   / Modal
   #myModal.modal.fade{:role => "dialog"}
     .modal-dialog
@@ -9,6 +9,23 @@
           %button.close{"data-dismiss" => "modal", :type => "button"} ×
           %h4.modal-title Modal Header
         .modal-body
-          %p Some text in the modal.
+          Puzzle
+          %select
+            %option{:value => 0} 2x2x2
+            %option{:value => 1} 3x3x3
+            %option{:value => 2} 4x4x4
+            %option{:value => 3} 5x5x5
+            %option{:value => 4} 6x6x6
+            %option{:value => 5} 7x7x7
+            %option{:value => 6} Square-1
+            %option{:value => 7} R's Clock
+            %option{:value => 8} Megaminx
+            %option{:value => 9} Pyraminx
+          %br
+          %input{:name => "inspectTime", :type => "checkbox", :value => true}/
+          Inspection time
+          %br
+          %input{:name => "time", :type => "checkbox", :value => true}/
+          Show time when solving
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
