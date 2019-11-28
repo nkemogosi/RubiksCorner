@@ -1,10 +1,10 @@
-= render 'shared/settingsSideBar'
+= render 'shared/settingsModal'
 %h1=t('.title')
 .stopwatch-container
   .stopwatch-body
     %h1#timeVal
       %time 00:00:00
-    .stopwatch-body.text
+    .stopwatch-body#stopwatch_text
       %p1= Scrambler::ThreeByThree.new.scramble
     .stopwatch-body.buttons
       %button.plus2Btn +2S

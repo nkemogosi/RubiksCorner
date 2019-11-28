@@ -52,3 +52,14 @@ en:
     request_contact:
       no_email: You must supply an email address
       email_sent: Thank you. We will be in touch shortly.
+  rubix:
+    opt1: 2x2x2
+    opt2: 3x3x3
+    opt3: 4x4x4
+    opt4: 5x5x5
+    opt5: 6x6x6
+    opt6: 7x7x7
+    opt7: Square-1
+    opt8: R's Clock
+    opt9: Megaminx
+    opt10: Pyraminx

@@ -9,7 +9,7 @@
 
     %meta{'name' => 'description', 'content' => t('app_description')}
     %meta{'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1'}
-
+    %link{:href => "https://fonts.googleapis.com/css?family=Roboto Mono", :rel => "stylesheet"}/
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'modernizr'
@@ -22,4 +22,5 @@
     = render 'shared/header'
   %body
     = yield
+  %footer
     = render 'shared/footer'

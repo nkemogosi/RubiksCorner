@@ -25,6 +25,7 @@ $(document).ready(function() {
           return;
         }
         if (e.keyCode === 32) {
+          setTimeout(changeColor,100);
           keyDown=true;
           if(stopped&&!running){
             if((mins+secs+millsecs)!=0){
@@ -60,7 +61,12 @@ $(document).ready(function() {
 
         }
     });
+    function changeColor(){
+      if(){
 
+      }
+      $("body").css("background-color","green");
+    }
     function stopwatch() {
         t = setTimeout(add, 10);
     }
