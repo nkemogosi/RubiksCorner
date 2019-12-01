@@ -2,9 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body{
-background-color: #AAADAE;
-}
 
 .stopwatch-container{
   margin: auto;
@@ -16,12 +13,8 @@ background-color: #AAADAE;
   left: 50%;top: 50%;
 }
 .stopwatch-body.buttons{
-  margin: auto;
-  padding: 15px 25px;
-  width: 100%;
-  max-width: 300px;
-  position: absolute;
-  transform: translate(-50%, 100%);
+  
+  flex: auto;
   left: 50%;top: 50%;
 }
 #timeVal{
@@ -35,7 +28,9 @@ background-color: #AAADAE;
   white-space: nowrap;
   flex: auto;
 }
-
+.stopwatch-body.buttons{
+  //visibility: hidden;
+}
 // .plus2Btn{
 //   visibility: hidden;
 // }

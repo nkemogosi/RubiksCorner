@@ -1,38 +1,39 @@
-%nav.navbar.navbar-default{:role => "navigation"}
-  .container-fluid
-    .navbar-header
-      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        %a.navbar-brand{:href => "home"} Rubik's Corner
-        %li.active
-          %a{:href => about_path} About
-        %li
-          %a{:href => contact_path} Contact Us
-      %ul.nav.navbar-nav.navbar-right
-        -if user_signed_in?
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Account
-              %ul.dropdown-menu{:role => "menu"}
-                %li
-                  %a{:href => "#"} My Account
-                %li.divider
-                %li
-                %li
-                  = link_to('Sign Out', destroy_user_session_path, method: :delete)
-        -else
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Account
-              %ul.dropdown-menu{:role => "menu"}
-                %li
-                  %a{:href => new_user_session_path} Sign In
-                %li.divider
-                %li
-                %li
-                  %a{:href => new_user_registration_path} Sign Out
+.myheader
+  %nav.navbar.navbar-default{:role => "navigation"}
+    .container-fluid
+      .navbar-header
+        %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %a.navbar-brand{:href => "home"} Rubik's Corner
+          %li.active
+            %a{:href => about_path} About
+          %li
+            %a{:href => contact_path} Contact Us
+        %ul.nav.navbar-nav.navbar-right
+          -if user_signed_in?
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Account
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => "#"} My Account
+                  %li.divider
+                  %li
+                  %li
+                    = link_to('Sign Out', destroy_user_session_path, method: :delete)
+          -else
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Account
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => new_user_session_path} Sign In
+                  %li.divider
+                  %li
+                  %li
+                    %a{:href => new_user_registration_path} Sign Out
