@@ -5,9 +5,40 @@
     %h1#timeVal
       %time 00:00:00
     .stopwatch-body#stopwatch_text
-      %p1= Scrambler::ThreeByThree.new.scramble
+      %p1#puzzleScramble
+        = Scrambler::ThreeByThree.new.scramble(25)
     .stopwatch-body.buttons
       %button.plus2Btn +2S
       %button.dnfBtn DNF
       %button.delBtn DELETE
       %button.saveBtn SAVE
+:javascript
+  function updatePuzzle(){
+    var size = document.getElementById('puzzleSize').value;
+    var puzzle = document.getElementById('puzzle').value;
+    var test = #{Scrambler::ThreeByThree.new.scramble(25)};
+    alert(test);
+    switch(puzzle){
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      case 5:
+        break;
+      case 6:
+        break;
+      case 7:
+        break;
+      case 8:
+        break;
+      case 9:
+        break;
+
+    }
+  }
