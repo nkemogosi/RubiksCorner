@@ -13,7 +13,7 @@
   left: 50%;top: 50%;
 }
 .stopwatch-body.buttons{
-  
+
   flex: auto;
   left: 50%;top: 50%;
 }
@@ -28,9 +28,36 @@
   white-space: nowrap;
   flex: auto;
 }
-.stopwatch-body.buttons{
-  //visibility: hidden;
+.container#timeTable{
+  background-color: #ffffff;
+  width: 25%;
+  padding: 0;
+  border:0;
+  outline: 0;
+  margin: 0;
+  vertical-align: baseline;
+  ul {
+  list-style-type: none;
+ }
 }
+#settingsButton{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: Transparent;
+  font-size: 40px;
+  margin-left: 100%;
+  white-space: nowrap;
+  flex: auto;
+  color: white;
+}
+#settingsButton:hover {
+  //border-style: inset;
+  color: black;
+}
+.inner{
+  display: inline-block;
+}
+
 // .plus2Btn{
 //   visibility: hidden;
 // }

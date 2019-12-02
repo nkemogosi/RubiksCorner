@@ -3,18 +3,23 @@
 //You can use CoffeeScript in this file: http://coffeescript.org/
 //x = event.which || event.keyCode;
 $(document).ready(function() {
-
+ $("#settingsButton").hover(function(){
+   $(this).toggleClass('fa-spin')
+ });
   var keyDown = false,
       dnf = false,
       plus2 = false,
-      timeDelay=1000,
+      timeDelay=500,
+      stopped=false,
       pastTime=0,
       millisecs=0,secs=0,mins=0,
       h1 = $("#timeVal"),
       delBtn = $(".delBtn"),
       t, dnfBtn = $(".dnfBtn"),
       plus2Btn = $(".plus2Btn"),
-      saveBtn = $(".saveBtn");
+      saveBtn = $(".saveBtn")
+      autostart=0;
+      hideBtns();
   $(document).keypress(function(e) {
       if(keyDown){
         return;
@@ -32,11 +37,16 @@ $(document).ready(function() {
           if($.now()-pastTime>=timeDelay){
             if((millisecs+secs+mins)>0){
               save();
-              return;
             }
-           startStopwatch();
+            if(autostart==0){
+              startStopwatch();
+            }else{
+
+            }
+
           }else{
             clearTimeout(t);
+            stopped=true;
             showBtns();
           }
       }
@@ -78,13 +88,19 @@ $(document).ready(function() {
 
   }
   function showBtns() {
-      delBtn.css("visibility","true");
+      delBtn.show();
       plus2Btn.show();
       dnfBtn.show();
       saveBtn.show();
   }
+  function hideBtns() {
+      delBtn.hide();
+      plus2Btn.hide();
+      dnfBtn.hide();
+      saveBtn.hide();
+  }
   function save() {
-        if (plus) {
+        if (plus2) {
           secs+=2;
         }
         if (dnf) {

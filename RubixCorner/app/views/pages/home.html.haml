@@ -8,15 +8,68 @@
       %p1#puzzleScramble
         = Scrambler::ThreeByThree.new.scramble(25)
     .stopwatch-body.buttons
-      %button.plus2Btn +2S
-      %button.dnfBtn DNF
-      %button.delBtn DELETE
-      %button.saveBtn SAVE
+      %button.plus2Btn.inner +2S
+      %button.dnfBtn.inner DNF
+      %button.delBtn.inner DELETE
+      %button.saveBtn.inner SAVE
+
+.container#timeTable
+  Statistics
+  %ul
+    %li
+      %a{:title => "The smallest solution time"}
+        %em Best:
+        %span#statBest
+    %li
+      %a{:title => "The biggest solution time"}
+        %em Worst:
+        %span#statWorst
+    %li
+      %a{:title => "Average of all solution times"}
+        %em Average:
+        %span#statAvg
+    %li
+      %a{:title => "The time situated in the middle when times are in increasing order"}
+        %em Median:
+        %span#statMedian
+    %li
+      %a{:title => "Standard Deviation"}
+        %em S Deviation:
+        %span#statSDeviation
+    %li
+      %a{:title => "Average of the last 5 times"}
+        %em Avg 5:
+        %span#statAvgLast5
+    %li
+      %a{:title => "Mean of the last 5 times, not counting the best and worst results"}
+        %em 3 of 5:
+        %span#statLast3of5
+    %li
+      %a{:title => "The best 3 of 5 consecutive times, not counting the best and worst results"}
+        %em Best 3 of 5:
+        %span#statBest3of5
+    %li
+      %a{:title => "Average of the last 10 times"}
+        %em Avg 12:
+        %span#statAvgLast12
+    %li
+      %a{:title => "Mean of the last 12 times, not counting the best and worst results"}
+        %em 10 of 12:
+        %span#statLast10of12
+    %li
+      %a{:title => "The best 10 of 12 consecutive times, not counting the best and worst results"}
+        %em Best 10 of 12:
+        %span#statBest10of12
+
+
+
+
 :javascript
   function updatePuzzle(){
     var size = document.getElementById('puzzleSize').value;
     var puzzle = document.getElementById('puzzle').value;
-    var test = #{Scrambler::ThreeByThree.new.scramble(25)};
+    var test ="";
+    console.log(test);
     alert(test);
     switch(puzzle){
       case 0:
