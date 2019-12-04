@@ -1,0 +1,2 @@
+class RTime < ApplicationRecord
+end

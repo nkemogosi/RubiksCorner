@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  minutes: 1
+  seconds: 1
+  millisecs: 1
+  solveDate: 2019-12-04 23:15:49
+  dnf: false
+  plus2: false
+
+two:
+  minutes: 1
+  seconds: 1
+  millisecs: 1
+  solveDate: 2019-12-04 23:15:49
+  dnf: false
+  plus2: false

@@ -1,0 +1,28 @@
+= form_for @r_time do |f|
+  - if @r_time.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@r_time.errors.count, "error")} prohibited this r_time from being saved:"
+      %ul
+        - @r_time.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :minutes
+    = f.number_field :minutes
+  .field
+    = f.label :seconds
+    = f.number_field :seconds
+  .field
+    = f.label :millisecs
+    = f.number_field :millisecs
+  .field
+    = f.label :solveDate
+    = f.datetime_select :solveDate
+  .field
+    = f.label :dnf
+    = f.check_box :dnf
+  .field
+    = f.label :plus2
+    = f.check_box :plus2
+  .actions
+    = f.submit 'Save'
