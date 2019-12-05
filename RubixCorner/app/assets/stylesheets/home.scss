@@ -28,7 +28,7 @@
   white-space: nowrap;
   flex: auto;
 }
-.container#timeTable{
+.container#statsTable{
   background-color: #ffffff;
   width: 25%;
   padding: 0;
@@ -39,6 +39,22 @@
   ul {
   list-style-type: none;
  }
+}
+.container#timeTable{
+  background-color: #ffffff;
+  width: 25%;
+  padding: 0;
+  border:0;
+  outline: 0;
+  margin: 0;
+  padding-top: 10px;
+  vertical-align: baseline;
+  ul {
+  list-style-type: none;
+ }
+}
+#tableOfTimes{
+  font-family: arial,sans-serif;
 }
 #settingsButton{
   background-color: Transparent;

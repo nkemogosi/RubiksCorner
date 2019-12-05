@@ -13,7 +13,7 @@
       %button.delBtn.inner DELETE
       %button.saveBtn.inner SAVE
 
-.container#timeTable
+.container#statsTable
   Statistics
   %ul
     %li
@@ -61,8 +61,19 @@
         %em Best 10 of 12:
         %span#statBest10of12
 
-
-
+.container#timeTable
+  Times
+  %table#tableOfTimes
+    %thead
+      %tr
+        %th Rank
+        %th Time
+        %th Date
+    %tbody.table-scrollbar.table-wrapper-scroll-y
+      %tr
+        %td vTable Data
+        %td T
+        %td T
 
 :javascript
   function updatePuzzle(){
