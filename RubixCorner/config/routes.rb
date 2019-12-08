@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :discussions
   resources :r_times
   devise_for :users
   get 'home',to: 'pages#home'

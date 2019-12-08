@@ -69,6 +69,6 @@ class RTimesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def r_time_params
-      params.require(:r_time).permit(:minutes, :seconds, :millisecs, :solveDate, :dnf, :plus2)
+      params.require(:r_time).permit(:minutes, :seconds, :millisecs, :dnf, :plus2)
     end
 end

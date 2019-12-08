@@ -20,7 +20,7 @@
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 Account
                 %ul.dropdown-menu{:role => "menu"}
-                  %h3.center Hello #{current_user.username}
+                  %h3.center.hello-text Hello #{current_user.username}
                   %li
                     %a{:href => "#"} My Account
                   %li.divider
@@ -37,4 +37,4 @@
                   %li.divider
                   %li
                   %li
-                    %a{:href => new_user_registration_path} Sign Out
+                    %a{:href => new_user_registration_path} Sign Up

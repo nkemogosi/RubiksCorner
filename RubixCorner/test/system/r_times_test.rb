@@ -19,7 +19,6 @@ class RTimesTest < ApplicationSystemTestCase
     fill_in "Minutes", with: @r_time.minutes
     check "Plus2" if @r_time.plus2
     fill_in "Seconds", with: @r_time.seconds
-    fill_in "Solvedate", with: @r_time.solveDate
     click_on "Create R time"
 
     assert_text "R time was successfully created"
@@ -35,7 +34,6 @@ class RTimesTest < ApplicationSystemTestCase
     fill_in "Minutes", with: @r_time.minutes
     check "Plus2" if @r_time.plus2
     fill_in "Seconds", with: @r_time.seconds
-    fill_in "Solvedate", with: @r_time.solveDate
     click_on "Update R time"
 
     assert_text "R time was successfully updated"

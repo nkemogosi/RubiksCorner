@@ -17,7 +17,7 @@ class RTimesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create r_time" do
     assert_difference('RTime.count') do
-      post r_times_url, params: { r_time: { dnf: @r_time.dnf, millisecs: @r_time.millisecs, minutes: @r_time.minutes, plus2: @r_time.plus2, seconds: @r_time.seconds, solveDate: @r_time.solveDate } }
+      post r_times_url, params: { r_time: { dnf: @r_time.dnf, millisecs: @r_time.millisecs, minutes: @r_time.minutes, plus2: @r_time.plus2, seconds: @r_time.seconds} }
     end
 
     assert_redirected_to r_time_url(RTime.last)
@@ -34,7 +34,7 @@ class RTimesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update r_time" do
-    patch r_time_url(@r_time), params: { r_time: { dnf: @r_time.dnf, millisecs: @r_time.millisecs, minutes: @r_time.minutes, plus2: @r_time.plus2, seconds: @r_time.seconds, solveDate: @r_time.solveDate } }
+    patch r_time_url(@r_time), params: { r_time: { dnf: @r_time.dnf, millisecs: @r_time.millisecs, minutes: @r_time.minutes, plus2: @r_time.plus2, seconds: @r_time.seconds} }
     assert_redirected_to r_time_url(@r_time)
   end
 

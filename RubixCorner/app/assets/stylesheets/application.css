@@ -34,6 +34,10 @@ th, td {
   text-align: left;
   padding: 8px;
 }
+.hello-text{
+  font-family: arial,sans-serif;
+  font-size: 14px;
+}
 
 
 footer {
@@ -41,6 +45,5 @@ footer {
   bottom: 0;
   width: 100%;
   left: 0;
-  bottom: 0;
   /*height: 2.5rem;            /* Footer height */
 }

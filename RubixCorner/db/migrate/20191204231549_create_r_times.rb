@@ -6,8 +6,7 @@ class CreateRTimes < ActiveRecord::Migration[5.2]
       t.integer :millisecs, null: false, default: 0
       t.boolean :dnf
       t.boolean :plus2
-
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

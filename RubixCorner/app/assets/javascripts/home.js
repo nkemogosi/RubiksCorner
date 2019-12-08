@@ -9,7 +9,7 @@ $(document).ready(function() {
   var keyDown = false,
       dnf = false,
       plus2 = false,
-      timeDelay=500,
+      timeDelay=501,
       stopped=false,
       pastTime=0,
       millisecs=0,secs=0,mins=0,
@@ -108,5 +108,37 @@ $(document).ready(function() {
         }
         resetClock();
     }
+    function updatePuzzle(){
+      var size = document.getElementById('puzzleSize').value;
+      var puzzle = document.getElementById('puzzle').value;
+      var test ="";
+      console.log(test);
+      alert(test);
+      switch(puzzle){
+        case 0:
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+        case 5:
+          break;
+        case 6:
+          break;
+        case 7:
+          break;
+        case 8:
+          break;
+        case 9:
+          break;
 
+      }
+    }
+    function test(){
+      alert();
+    }
 });

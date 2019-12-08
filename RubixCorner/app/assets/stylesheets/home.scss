@@ -42,9 +42,10 @@
 }
 .container#timeTable{
   background-color: #ffffff;
-  width: 25%;
+  width: 30%;
   padding: 0;
-  border:0;
+  border-style: solid;
+  border-width: 5px;
   outline: 0;
   margin: 0;
   padding-top: 10px;
@@ -66,6 +67,7 @@
   flex: auto;
   color: white;
 }
+
 #settingsButton:hover {
   //border-style: inset;
   color: black;
