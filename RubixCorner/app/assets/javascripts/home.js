@@ -48,6 +48,7 @@ $(document).ready(function() {
             clearTimeout(t);
             stopped=true;
             showBtns();
+            save();
           }
       }
   });
@@ -106,6 +107,20 @@ $(document).ready(function() {
         if (dnf) {
 
         }
+      //  if(readCookie("user_signed_in")!=null){
+         alert("test");
+          $.ajax({
+            url: "/r_times.json",
+            type: "POST",
+            data: {"id":1,"minutes":mins,"seconds":secs,"millisecs":millisecs,"dnf":dnf,"plus2":plus2},
+            success: function(data) {
+              console.log(data);
+            }
+          });
+      //  }else{
+
+      //  }
+
         resetClock();
     }
     function updatePuzzle(){
@@ -138,7 +153,14 @@ $(document).ready(function() {
 
       }
     }
-    function test(){
-      alert();
-    }
+    function readCookie(name) {
+      var cookieName = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(cookieName) == 0) return c.substring(cookieName.length,c.length);
+      }
+      return null;
+  }
 });

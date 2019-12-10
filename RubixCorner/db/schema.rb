@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_07_191854) do
+ActiveRecord::Schema.define(version: 2019_12_09_235458) do
+
+  create_table "discussions", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "r_times", force: :cascade do |t|
     t.integer "minutes", default: 0, null: false
@@ -20,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_12_07_191854) do
     t.boolean "plus2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username", default: "", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -51,7 +51,7 @@ en:
       submit: Contact Us
     request_contact:
       no_email: You must supply an email address
-      email_sent: Thank you. We will be in touch shortly.
+      sent: Thank you. We will be in touch shortly.
   rubix:
     opt1: 2x2x2
     opt2: 3x3x3
