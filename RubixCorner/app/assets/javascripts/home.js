@@ -10,7 +10,7 @@ $(document).ready(function() {
       dnf = false,
       plus2 = false,
       timeDelay=501,
-      stopped=false,
+      stopped=true,
       pastTime=0,
       millisecs=0,secs=0,mins=0,
       h1 = $("#timeVal"),
@@ -35,20 +35,21 @@ $(document).ready(function() {
           keyDown=false;
           $("body").css("background-color","#D8D4D4");
           if($.now()-pastTime>=timeDelay){
-            if((millisecs+secs+mins)>0){
-              save();
-            }
+            h1.html("00:00:00");
             if(autostart==0){
+              stopped = false;
               startStopwatch();
             }else{
 
             }
 
           }else{
-            clearTimeout(t);
-            stopped=true;
-            showBtns();
-            save();
+            if(!stopped){
+              clearTimeout(t);
+              stopped=true;
+              showBtns();
+              save();
+            }
           }
       }
   });
@@ -79,13 +80,9 @@ $(document).ready(function() {
       millisecs = 0;
       secs  = 0;
       mins=0;
-      h1.html("00:00:00");
-      running = false;
       stopped = true;
       keyDown = false;
-      if(delBtn.is(":visible")){
-        hideBtns();
-      }
+      hideBtns();
 
   }
   function showBtns() {
@@ -107,52 +104,59 @@ $(document).ready(function() {
         if (dnf) {
 
         }
-      //  if(readCookie("user_signed_in")!=null){
-         alert("test");
+
+        if(readCookie("user_signed_in")!=null){
           $.ajax({
-            url: "/r_times.json",
+            url: "/r_times",
             type: "POST",
-            data: {"id":1,"minutes":mins,"seconds":secs,"millisecs":millisecs,"dnf":dnf,"plus2":plus2},
+            data: {"user_id":1,"minutes":mins,"seconds":secs,"millisecs":millisecs,"dnf":dnf,"plus2":plus2},
             success: function(data) {
               console.log(data);
+            },
+            error: function(jqXHR, exception) {
+              alert(data);
             }
+
           });
-      //  }else{
-
-      //  }
-
+        }
+        addToTable(convertToValue(mins,secs,millisecs));
         resetClock();
     }
-    function updatePuzzle(){
-      var size = document.getElementById('puzzleSize').value;
-      var puzzle = document.getElementById('puzzle').value;
-      var test ="";
-      console.log(test);
-      alert(test);
-      switch(puzzle){
-        case 0:
-          break;
-        case 1:
-          break;
-        case 2:
-          break;
-        case 3:
-          break;
-        case 4:
-          break;
-        case 5:
-          break;
-        case 6:
-          break;
-        case 7:
-          break;
-        case 8:
-          break;
-        case 9:
-          break;
+  function addToTable(value){
+    var dateT = new Date();
+    var newRow ="<tr data-value=\""+value+"\"><td>"+h1.html()+"</td><td>"+dateT.getFullYear()+"-"+dateT.getMonth()+"-"+dateT.getDay()+"</td></tr>"
+    console.log("table.html()");
+  }
+  function updatePuzzle(){
+    var size = document.getElementById('puzzleSize').value;
+    var puzzle = document.getElementById('puzzle').value;
+    var test ="";
+    console.log(test);
+    alert(test);
+    switch(puzzle){
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      case 5:
+        break;
+      case 6:
+        break;
+      case 7:
+        break;
+      case 8:
+        break;
+      case 9:
+        break;
 
-      }
     }
+  }
     function readCookie(name) {
       var cookieName = name + "=";
       var ca = document.cookie.split(';');
@@ -162,5 +166,24 @@ $(document).ready(function() {
           if (c.indexOf(cookieName) == 0) return c.substring(cookieName.length,c.length);
       }
       return null;
+  }
+  function convertToValue(min,sec,mill){
+    return min*600+sec*100+mill;
+  }
+  function convertTimeToValue(time){
+    var res = time.split(":");
+    for (var i=0; i<res.length; i++){
+    res[i] = parseInt(res[i], 10);
+    }
+    return convertToTime(res[0],res[1],res[2]);
+  }
+  function convertToTime(time){
+    var mins=0,secs=0,mills=0;
+    mins=Math.round(time/600);
+    time=time-(mins*600);
+    secs=Math.round(time/100);
+    time=time-(secs*100);
+    mills= time;
+    return (mins ? (mins > 9 ? mins : "0" + mins) : "00") + ":" + (secs ? (secs > 9 ? secs : "0" + secs) : "00") + ":" + (mills > 9 ? mills : "0" + mills);
   }
 });

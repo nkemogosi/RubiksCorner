@@ -24,11 +24,11 @@ class RTimesController < ApplicationController
   # POST /r_times
   # POST /r_times.json
   def create
-    @r_time = RTime.new(r_time_params)
+    @user_id = current_user.id
+    @r_time = RTime.new(user_id: @user_id,minutes:params[:minutes],seconds:params[:seconds],millisecs:params[:millisecs],dnf:params[:dnf],plus2:params[:plus2])
 
     respond_to do |format|
       if @r_time.save
-        format.html { redirect_to @r_time, notice: 'R time was successfully created.' }
         format.json { render :show, status: :created, location: @r_time }
       else
         format.html { render :new }

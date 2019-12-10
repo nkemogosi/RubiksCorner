@@ -22,6 +22,12 @@
       %p.alert.alert-danger= alert
     = render 'shared/header'
   %body
+    -if user_signed_in?
+      :javascript
+        document.cookie="user_signed_in=true";
+    -else
+      :javascript
+        document.cookie="user_signed_in= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     = yield
   %footer
     = render 'shared/footer'

@@ -22,11 +22,10 @@ class User < ApplicationRecord
     end
     conditions[:email].downcase! if conditions[:email]
     where(conditions.to_h).first
+    end
+    def validate_username
+      if User.where(email: username).exists?
+        errors.add(:username, :invalid)
+    end
   end
-  def validate_username
-  if User.where(email: username).exists?
-    errors.add(:username, :invalid)
-  end
-end
-
 end
