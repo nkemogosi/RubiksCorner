@@ -11,13 +11,12 @@
       %button.plus2Btn.inner +2S
       %button.dnfBtn.inner DNF
       %button.delBtn.inner DELETE
-      %button.saveBtn.inner SAVE
 
 .container#statsTable
   Statistics
   %ul
     %li
-      %a{:title => "The smallest solution time"}
+      %a{:title => t('.statBest')}
         %em Best:
         %span#statBest
     %li
@@ -48,16 +47,11 @@
       %a{:title => "Mean of the last 12 times, not counting the best and worst results"}
         %em 10 of 12:
         %span#statLast10of12
-    %li
-      %a{:title => "The best 10 of 12 consecutive times, not counting the best and worst results"}
-        %em Best 10 of 12:
-        %span#statBest10of12
 
-.container#timeTable
-  Times
-  %table#tableOfTimes
-    %thead
-      %tr
-        %th Time
-        %th Date
-    %tbody#timeTableBody
+Times
+%table.fixed_header#tableOfTimes
+  %thead
+    %tr
+      %th Time
+      %th Date
+  %tbody#timeTableBody

@@ -1,10 +1,11 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user! except [:index, :show]
   # GET /discussions
   # GET /discussions.json
   def index
-    @discussions = Discussion.all
+    @discussions = Discussion.all.order("created_at desc")
+      @channels = Channels.all.order()
   end
 
   # GET /discussions/1

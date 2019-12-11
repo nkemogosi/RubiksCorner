@@ -35,10 +35,10 @@ en:
     home:
       title: "Rubix's Corner"
       welcome: "Hello welcome to Rubix's Corner! A website dedicated to all things Rubix cube"
-
+      statBest: "The smallest solution time"
     contact:
       title: "Contact Us"
-      contact_us: "Complete the following for to get in toch with us"
+      contact_us: "Complete the following for to get in touch with us"
 
       name: "Name:"
       enter_name: Enter your name

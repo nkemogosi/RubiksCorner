@@ -23,9 +23,14 @@
               %option{:value => 7} R's Clock
               %option{:value => 8} Megaminx
               %option{:value => 9} Pyraminx
-            %input{:name => "inspectTime", :type => "checkbox", :inspect => false} Inspection time
-            %input{:name => "time", :type => "checkbox", :time => true} Show time when solving
-            Quantity (between 1 and 5):
-            %input#puzzleSize{:max => "5", :min => "1", :name => "quantity", :type => "number"}/
+            Auto Start
+            .flowBox
+              %input{:name => "inspectTime", :type => "radio", :inspect => false} 0s
+              %input{:name => "inspectTime", :type => "radio", :inspect => false} 3s
+              %input{:name => "inspectTime", :type => "radio", :inspect => false} 10s
+              %input{:name => "inspectTime", :type => "radio", :inspect => false} 15s
+              %input{:name => "time", :type => "checkbox", :time => true} Show time when solving
+            Quantity:
+            %input#puzzleSize{ :min => "1", :name => "quantity",:value=> "25", :type => "number"}/
           .modal-footer
             %button.btn.btn-default{:onclick=>"updatePuzzle()","data-dismiss" => "modal", :type => "submit"} Save and Close

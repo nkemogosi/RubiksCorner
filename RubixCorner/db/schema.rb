@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_10_161142) do
+ActiveRecord::Schema.define(version: 2019_12_11_194917) do
+
+  create_table "channels", force: :cascade do |t|
+    t.string "channel"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "discussion_id"
+  end
 
   create_table "discussions", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "channel_id"
   end
 
   create_table "r_times", force: :cascade do |t|
@@ -27,6 +35,14 @@ ActiveRecord::Schema.define(version: 2019_12_10_161142) do
     t.boolean "plus2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.text "reply"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "discussion_id"
     t.integer "user_id"
   end
 

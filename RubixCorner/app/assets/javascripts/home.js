@@ -3,9 +3,13 @@
 //You can use CoffeeScript in this file: http://coffeescript.org/
 //x = event.which || event.keyCode;
 $(document).ready(function() {
+  if(readCookie("user_signed_in")!=null){
+
+  }
  $("#settingsButton").hover(function(){
    $(this).toggleClass('fa-spin')
  });
+ updatePuzzle();
   var keyDown = false,
       dnf = false,
       plus2 = false,
@@ -17,7 +21,6 @@ $(document).ready(function() {
       delBtn = $(".delBtn"),
       t, dnfBtn = $(".dnfBtn"),
       plus2Btn = $(".plus2Btn"),
-      saveBtn = $(".saveBtn")
       autostart=0;
       hideBtns();
   $(document).keypress(function(e) {
@@ -82,6 +85,7 @@ $(document).ready(function() {
       mins=0;
       stopped = true;
       keyDown = false;
+      updatePuzzle();
       hideBtns();
 
   }
@@ -89,13 +93,11 @@ $(document).ready(function() {
       delBtn.show();
       plus2Btn.show();
       dnfBtn.show();
-      saveBtn.show();
   }
   function hideBtns() {
       delBtn.hide();
       plus2Btn.hide();
       dnfBtn.hide();
-      saveBtn.hide();
   }
   function save() {
         if (plus2) {
@@ -109,12 +111,12 @@ $(document).ready(function() {
           $.ajax({
             url: "/r_times",
             type: "POST",
-            data: {"user_id":1,"minutes":mins,"seconds":secs,"millisecs":millisecs,"dnf":dnf,"plus2":plus2},
+            data: {"minutes":mins,"seconds":secs,"millisecs":millisecs,"dnf":dnf,"plus2":plus2},
             success: function(data) {
               console.log(data);
             },
             error: function(jqXHR, exception) {
-              alert(data);
+              alert(exception);
             }
 
           });
@@ -131,33 +133,20 @@ $(document).ready(function() {
   function updatePuzzle(){
     var size = document.getElementById('puzzleSize').value;
     var puzzle = document.getElementById('puzzle').value;
-    var test ="";
-    console.log(test);
-    alert(test);
-    switch(puzzle){
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      case 5:
-        break;
-      case 6:
-        break;
-      case 7:
-        break;
-      case 8:
-        break;
-      case 9:
-        break;
+    $.ajax({
+      url: "/create_scramble",
+      type: "POST",
+      data: {"puzzleSize":size,"puzzle":puzzle},
+      success: function(data) {
+        $("#puzzleScramble").html(data.value);
+      },
+      error: function(jqXHR, exception) {
+        alert(exception);
+      }
+
+    });
 
     }
-  }
     function readCookie(name) {
       var cookieName = name + "=";
       var ca = document.cookie.split(';');
@@ -173,11 +162,11 @@ $(document).ready(function() {
   }
   function convertToTime(time){
     var mins=0,secs=0,mills=0;
-    mins=Math.round(time/600);
+    mins=Math.floor(time/600);
     time=time-(mins*600);
-    secs=Math.round(time/100);
+    secs=Math.floor(time/100);
     time=time-(secs*100);
-    mills= time;
+    mills= Math.floor(time);
     return (mins ? (mins > 9 ? mins : "0" + mins) : "00") + ":" + (secs ? (secs > 9 ? secs : "0" + secs) : "00") + ":" + (mills > 9 ? mills : "0" + mills);
   }
   function calculateStats(){
@@ -190,15 +179,34 @@ $(document).ready(function() {
     //The destructuring assignment syntax is a JavaScript expression that makes it possible to extract data from arrays or objects into distinct variables
     let best = Math.min(...arrTimes);
     let worst = Math.max(...arrTimes);
-    let sum = arrTimes.reduce((previous, current) => current += previous);
-    let avg = sum / arrTimes.length;
+    let avg = (arrTimes.reduce((previous, current) => current += previous))/arrTimes.length; //Does a sum reduction on the array
+    $("#statBest").html(convertToTime(best));
+    $("#statWorst").html(convertToTime(worst));
+    $("#statAvg").html(convertToTime(avg));
+    if(arrTimes.length>4){
+      let last5Arr= arrTimes.slice(0,4);
+      let last5Avg = (last5Arr.reduce((previous, current) => current += previous))/last5Arr.length;
+      let best3_5 = Math.min(...last5Arr);
+      let worst3_5 = Math.max(...last5Arr);
+      let last3_5Avg =(last5Arr.reduce((previous, current) => current += previous))-(best3_5-worst3_5)/last5Arr.length;
+      $("#statAvgLast5").html(convertToTime(last3_5Avg));
+      $("#statLast3of5").html(convertToTime(last3_5Avg));
+    }
+    if(arrTimes.length>11){
+
+      let last12Arr= arrTimes.slice(0,11);
+      let last12Avg = (last12Arr.reduce((previous, current) => current += previous))/last12Arr.length;
+      let best10_12 = Math.min(...last12Arr);
+      let worst10_12 = Math.max(...last12Arr);
+      let last10_12Avg =(last5Arr.reduce((previous, current) => current += previous))-(best10_12-worst10_12)/last12Arr.length;
+      $("#statAvgLast12").html(convertToTime(last10_12Avg));
+      $("#statLast10of12").html(convertToTime(last10_12Avg));
+    }
+
     arrTimes.sort((a, b) => a - b);
     let lowMiddle = Math.floor((arrTimes.length - 1) / 2);
     let highMiddle = Math.ceil((arrTimes.length - 1) / 2);
     let median = (arrTimes[lowMiddle] + arrTimes[highMiddle]) / 2;
-    $("#statBest").html(convertToTime(best));
-    $("#statWorst").html(convertToTime(worst));
-    $("#statAvg").html(convertToTime(avg));
     $("#statMedian").html(convertToTime(median));
   }
 });
