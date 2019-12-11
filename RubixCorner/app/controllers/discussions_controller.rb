@@ -1,7 +1,7 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user! except [:index, :show]
-  before_action :get_channels only: [:index, :show, :new, :edit] # Following DRY principles
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :get_channels, only: [:index, :show, :new, :edit] # Following DRY principles
   # GET /discussions
   # GET /discussions.json
   def index
