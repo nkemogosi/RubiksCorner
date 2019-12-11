@@ -120,12 +120,13 @@ $(document).ready(function() {
           });
         }
         addToTable(convertToValue(mins,secs,millisecs));
+        calculateStats();
         resetClock();
     }
   function addToTable(value){
     var dateT = new Date();
     var newRow ="<tr data-value=\""+value+"\"><td>"+h1.html()+"</td><td>"+dateT.getFullYear()+"-"+dateT.getMonth()+"-"+dateT.getDay()+"</td></tr>"
-    console.log("table.html()");
+    $("#timeTableBody").prepend(newRow);
   }
   function updatePuzzle(){
     var size = document.getElementById('puzzleSize').value;
@@ -170,13 +171,6 @@ $(document).ready(function() {
   function convertToValue(min,sec,mill){
     return min*600+sec*100+mill;
   }
-  function convertTimeToValue(time){
-    var res = time.split(":");
-    for (var i=0; i<res.length; i++){
-    res[i] = parseInt(res[i], 10);
-    }
-    return convertToTime(res[0],res[1],res[2]);
-  }
   function convertToTime(time){
     var mins=0,secs=0,mills=0;
     mins=Math.round(time/600);
@@ -185,5 +179,26 @@ $(document).ready(function() {
     time=time-(secs*100);
     mills= time;
     return (mins ? (mins > 9 ? mins : "0" + mins) : "00") + ":" + (secs ? (secs > 9 ? secs : "0" + secs) : "00") + ":" + (mills > 9 ? mills : "0" + mills);
+  }
+  function calculateStats(){
+    let arrTimes = [];
+    //Getting each table row and extracting the data value attribute
+    $("#timeTableBody > tr").each(function(index,tr){
+    let data =$(tr).data("value");
+    arrTimes.push(parseInt(data));
+    });
+    //The destructuring assignment syntax is a JavaScript expression that makes it possible to extract data from arrays or objects into distinct variables
+    let best = Math.min(...arrTimes);
+    let worst = Math.max(...arrTimes);
+    let sum = arrTimes.reduce((previous, current) => current += previous);
+    let avg = sum / arrTimes.length;
+    arrTimes.sort((a, b) => a - b);
+    let lowMiddle = Math.floor((arrTimes.length - 1) / 2);
+    let highMiddle = Math.ceil((arrTimes.length - 1) / 2);
+    let median = (arrTimes[lowMiddle] + arrTimes[highMiddle]) / 2;
+    $("#statBest").html(convertToTime(best));
+    $("#statWorst").html(convertToTime(worst));
+    $("#statAvg").html(convertToTime(avg));
+    $("#statMedian").html(convertToTime(median));
   }
 });

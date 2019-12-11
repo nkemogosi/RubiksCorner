@@ -33,10 +33,6 @@
         %em Median:
         %span#statMedian
     %li
-      %a{:title => "Standard Deviation"}
-        %em S Deviation:
-        %span#statSDeviation
-    %li
       %a{:title => "Average of the last 5 times"}
         %em Avg 5:
         %span#statAvgLast5
@@ -44,10 +40,6 @@
       %a{:title => "Mean of the last 5 times, not counting the best and worst results"}
         %em 3 of 5:
         %span#statLast3of5
-    %li
-      %a{:title => "The best 3 of 5 consecutive times, not counting the best and worst results"}
-        %em Best 3 of 5:
-        %span#statBest3of5
     %li
       %a{:title => "Average of the last 10 times"}
         %em Avg 12:
@@ -68,4 +60,4 @@
       %tr
         %th Time
         %th Date
-    %tbody.table-scrollbar.table-wrapper-scroll-y
+    %tbody#timeTableBody
