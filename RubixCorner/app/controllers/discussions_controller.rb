@@ -21,7 +21,7 @@ class DiscussionsController < ApplicationController
 
   # GET /discussions/1/edit
   def edit
-
+    @discussions = Discussion.all.order("created_at desc")
   end
 
   # POST /discussions

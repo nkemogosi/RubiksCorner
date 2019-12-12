@@ -4,4 +4,5 @@
     - @channels.each do |channel|
       %li= link_to channel.channel_name, channel
 %br/
-= link_to 'New Channel', new_channel_path, class: 'button'
+- if has_role?(:admin)
+  = link_to 'New Channel', new_channel_path, class: 'button'

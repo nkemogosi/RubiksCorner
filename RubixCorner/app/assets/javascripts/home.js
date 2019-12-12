@@ -9,7 +9,6 @@ $(document).ready(function() {
  $("#settingsButton").hover(function(){
    $(this).toggleClass('fa-spin')
  });
- updatePuzzle();
   var keyDown = false,
       dnf = false,
       plus2 = false,

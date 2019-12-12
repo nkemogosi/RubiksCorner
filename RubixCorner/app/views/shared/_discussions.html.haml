@@ -19,6 +19,7 @@
             - if discussion.channel
               = link_to discussion.channel.channel_name, discussion.channel
             by #{discussion.user.username}
-    .col-md
-      = link_to('Edit', edit_discussion_path(discussion), class:'button')
-      = link_to('Delete', discussion, methtod: :delete, data: {confirm: 'Are you sure you want to do this?'}, class:'button')
+    - if has_role?(:admin) || post_author(discussion)
+      .col-md
+        = link_to('Edit', edit_discussion_path(discussion), class:'button')
+        = link_to('Delete', discussion, methtod: :delete, data: {confirm: 'Are you sure you want to do this?'}, class:'button')
