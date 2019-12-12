@@ -6,7 +6,16 @@
 %p
   %b Content:
   = @discussion.content
-
+%hr
+%h3= t("discussions.show.reply_text")
 = link_to 'Edit', edit_discussion_path(@discussion)
 \|
 = link_to 'Back', discussions_path
+- if user_signed_in?
+  = # render 'replies/form'
+-else
+  %p
+    To reply you need to
+    =link_to('Log In', new_user_session_path)
+    Don't have an account?
+    =link_to('Sign Up',new_user_registration_path)

@@ -1,0 +1,7 @@
+.col-sm-3
+  %h3 Channels
+  %ul.list-group
+    - @channels.each do |channel|
+      %li= link_to channel.channel_name, channel
+%br/
+= link_to 'New Channel', new_channel_path, class: 'button'

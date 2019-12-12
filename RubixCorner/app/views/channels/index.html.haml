@@ -11,7 +11,7 @@
   %tbody
     - @channels.each do |channel|
       %tr
-        %td= channel.channel
+        %td= channel.channel_name
         %td= link_to 'Show', channel
         %td= link_to 'Edit', edit_channel_path(channel)
         %td= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' }

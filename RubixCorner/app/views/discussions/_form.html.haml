@@ -12,5 +12,7 @@
   .field
     = f.label :content
     = f.text_area :content
+  .field
+    = f.select :channel_id, collection: @channels.map {|c| [c.channel_name,c.id]}
   .actions
     = f.submit 'Save'
