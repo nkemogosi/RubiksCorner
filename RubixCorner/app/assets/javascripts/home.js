@@ -3,8 +3,26 @@
 //You can use CoffeeScript in this file: http://coffeescript.org/
 //x = event.which || event.keyCode;
 $(document).ready(function() {
+  function convertToValue(min,sec,mill){
+    return min*600+sec*100+mill;
+  }
   if(readCookie("user_signed_in")!=null){
+    $.ajax({
+      url: "/r_times",
+      type: "GET",
+      data: {},
+      success: function(data) {
+        data.forEach(function(item,index){
+          let value = convertToValue(parseInt(item.minutes,10),parseInt(item.seconds,10),parseInt(item.millisecs,10));
+          addToTable(value);
+        });
 
+      },
+      error: function(jqXHR, exception) {
+        alert(exception);
+      }
+
+    });
   }
  $("#settingsButton").hover(function(){
    $(this).toggleClass('fa-spin')
@@ -126,7 +144,7 @@ $(document).ready(function() {
     }
   function addToTable(value){
     var dateT = new Date();
-    var newRow ="<tr data-value=\""+value+"\"><td>"+h1.html()+"</td><td>"+dateT.getFullYear()+"-"+dateT.getMonth()+"-"+dateT.getDay()+"</td></tr>"
+    var newRow ="<tr data-value=\""+value+"\"><td>"+convertToTime(value)+"</td><td>"+dateT.getFullYear()+"-"+dateT.getMonth()+"-"+dateT.getDay()+"</td></tr>"
     $("#timeTableBody").prepend(newRow);
   }
   function updatePuzzle(){
@@ -155,9 +173,6 @@ $(document).ready(function() {
           if (c.indexOf(cookieName) == 0) return c.substring(cookieName.length,c.length);
       }
       return null;
-  }
-  function convertToValue(min,sec,mill){
-    return min*600+sec*100+mill;
   }
   function convertToTime(time){
     var mins=0,secs=0,mills=0;

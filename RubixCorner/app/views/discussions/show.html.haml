@@ -7,12 +7,16 @@
   %b Content:
   = @discussion.content
 %hr
+- if has_role?(:admin) || post_author(@discussion)
+  = link_to 'Edit', edit_discussion_path(@discussion)
+  \|
+  = link_to 'Back', discussions_path
 %h3= t("discussions.show.reply_text")
-= link_to 'Edit', edit_discussion_path(@discussion)
-\|
-= link_to 'Back', discussions_path
+#discussion_replies
+  = render @discussion.replies
+
 - if user_signed_in?
-  = # render 'replies/form'
+  = render 'replies/form'
 -else
   %p
     To reply you need to

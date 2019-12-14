@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   resources :channels
+  resources :r_times, only: [:index, :create, :update, :destroy]
   resources :discussions do
     resources :replies
   end
-  resources :r_times
+  #
   devise_for :users
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'
     get 'sign_up', to: 'devise/registrations#new'
+    delete 'sign_out', to: 'devise/sessions#destroy'
   end
   get 'forum', to: 'discussions#index'
   get 'home',to: 'pages#home'

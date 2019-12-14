@@ -1,15 +1,27 @@
 class RTimesController < ApplicationController
-  before_action :set_r_time, only: [:show, :edit, :update, :destroy]
+  before_action :set_r_time, only: [ :edit, :update, :destroy]
 
   # GET /r_times
   # GET /r_times.json
   def index
-    @r_times = RTime.all
-  end
-
-  # GET /r_times/1
-  # GET /r_times/1.json
-  def show
+    jsonText= "["
+    @user_id = current_user.id
+    @r_times = RTime.where('user_id = ?',@user_id).order("created_at asc")
+    @r_times.each_with_index do |r, index|
+      jsonText+='{"minutes": '+ r.minutes.to_s+","
+      jsonText+='"seconds": '+ r.seconds.to_s+","
+      jsonText+='"millisecs": '+ r.millisecs.to_s+","
+      jsonText+='"dnf": '+ r.seconds.to_s+","
+      if index < @r_times.size - 1
+        jsonText+='"plus2": '+ r.plus2.to_s+"},"
+      else
+        jsonText+='"plus2": '+ r.plus2.to_s+"}"
+      end
+    end
+    jsonText += "]"
+    respond_to do |format|
+      format.json { render json: JSON.parse(jsonText) }
+    end
   end
 
   # GET /r_times/new

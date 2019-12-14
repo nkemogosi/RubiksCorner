@@ -1,6 +1,5 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
-  before_action :is_admin
   # GET /channels
   # GET /channels.json
   def index
@@ -68,11 +67,6 @@ class ChannelsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_channel
       @channel = Channel.find(params[:id])
-    end
-    def is_admin
-      if !helpers.has_role?(:admin)
-        redirect_to home_path
-      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

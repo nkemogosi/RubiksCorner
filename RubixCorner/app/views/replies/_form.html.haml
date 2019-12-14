@@ -1,0 +1,5 @@
+= form_for([@discussion,@discussion.replies.build], remote:true) do |f|
+  .field
+    .control
+      = f.text_area :reply, input_html: {class: "textarea"}, wrapper: false, label_html:{class: 'label'}
+  = f.submit 'Leave a reply'

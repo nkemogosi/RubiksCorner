@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :discussions, :dependent => :destroy
   has_many :channels, :through => :discussions
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
-    validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_username
   def login
     @login || self.username || self.email

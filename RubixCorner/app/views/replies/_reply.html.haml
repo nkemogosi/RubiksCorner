@@ -1,0 +1,17 @@
+%div.container
+  %div.media
+    %div.media-body
+      %p
+        %strong
+          = reply.user.username
+          %small
+            = time_ago_in_words(reply.created_at)
+        %br/
+        = reply.reply
+      - if has_role?(:admin) || post_author(@discussion)
+        %nav
+          .container
+            %a
+              = link_to "Edit", edit_discussion_reply_path(reply.discussion,reply)
+            %a
+              = link_to "Delete", [reply.discussion, reply], method: :delete, data: {confirm: "Are you sure ?"}

@@ -10,10 +10,6 @@ class RTimesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_r_time_url
-    assert_response :success
-  end
 
   test "should create r_time" do
     assert_difference('RTime.count') do
@@ -21,21 +17,6 @@ class RTimesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to r_time_url(RTime.last)
-  end
-
-  test "should show r_time" do
-    get r_time_url(@r_time)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_r_time_url(@r_time)
-    assert_response :success
-  end
-
-  test "should update r_time" do
-    patch r_time_url(@r_time), params: { r_time: { dnf: @r_time.dnf, millisecs: @r_time.millisecs, minutes: @r_time.minutes, plus2: @r_time.plus2, seconds: @r_time.seconds} }
-    assert_redirected_to r_time_url(@r_time)
   end
 
   test "should destroy r_time" do
