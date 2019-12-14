@@ -7,10 +7,6 @@
     .stopwatch-body#stopwatch_text
       %p1#puzzleScramble
         = Scrambler::ThreeByThree.new.scramble(25)
-    .stopwatch-body.buttons
-      %button.plus2Btn.inner +2S
-      %button.dnfBtn.inner DNF
-      %button.delBtn.inner DELETE
 
 .container#statsTable
   Statistics
@@ -39,14 +35,6 @@
       %a{:title => "Mean of the last 5 times, not counting the best and worst results"}
         %em 3 of 5:
         %span#statLast3of5
-    %li
-      %a{:title => "Average of the last 10 times"}
-        %em Avg 12:
-        %span#statAvgLast12
-    %li
-      %a{:title => "Mean of the last 12 times, not counting the best and worst results"}
-        %em 10 of 12:
-        %span#statLast10of12
 
 Times
 %table.fixed_header#tableOfTimes

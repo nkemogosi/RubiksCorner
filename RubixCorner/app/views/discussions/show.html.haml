@@ -6,12 +6,12 @@
 %p
   %b Content:
   = @discussion.content
-%hr
 - if has_role?(:admin) || post_author(@discussion)
   = link_to 'Edit', edit_discussion_path(@discussion)
   \|
-  = link_to 'Back', discussions_path
-%h3= t("discussions.show.reply_text")
+= link_to 'Back', discussions_path
+%hr
+%h3= t("discussions.show.reply_text") +" - Replies: "+ @discussion.replies.count.to_s
 #discussion_replies
   = render @discussion.replies
 

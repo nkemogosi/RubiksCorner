@@ -1,7 +1,10 @@
-%h1 Editing channel
+- if has_role?(:admin)
+  %h1 Editing channel
 
-= render 'form'
+  = render 'form'
 
-= link_to 'Show', @channel
-\|
-= link_to 'Back', channels_path
+  = link_to 'Show', @channel
+  \|
+  = link_to 'Back', channels_path
+- else
+  %h1= t("access_denied")

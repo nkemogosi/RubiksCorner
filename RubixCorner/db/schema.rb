@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_12_030840) do
+ActiveRecord::Schema.define(version: 2019_12_14_152424) do
 
   create_table "channels", force: :cascade do |t|
     t.string "channel_name"
@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(version: 2019_12_12_030840) do
     t.integer "minutes", default: 0, null: false
     t.integer "seconds", default: 0, null: false
     t.integer "millisecs", default: 0, null: false
-    t.boolean "dnf"
-    t.boolean "plus2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"

@@ -1,3 +1,4 @@
+
 %h1 Listing channels
 
 
@@ -14,9 +15,10 @@
       %tr
         %td= channel.channel_name
         %td= link_to 'Show', channel
+      -if has_role?(:admin)
         %td= link_to 'Edit', edit_channel_path(channel)
         %td= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
-
-= link_to 'New Channel', new_channel_path
+-if has_role?(:admin)
+  = link_to 'New Channel', new_channel_path

@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   end
   def contact
   end
-  def request_contact
+  def request_contact #Setting up mailer
     name = params[:name]
     email = params[:email]
     telephone = params[:telephone]
@@ -13,11 +13,11 @@ class PagesController < ApplicationController
     if email.blank?
       flash[:alert]=I18n.t('pages.request_contact.no_email')
     else
-      flash[:alert]=I18n.t('pages.request_contact.sent')
+      flash[:notice]=I18n.t('pages.request_contact.sent')
     end
     redirect_to root_path
   end
-  def create_scramble
+  def create_scramble # Action that allows the new scrambles using a gem to be rendered
     size = params[:puzzleSize]
     puzzle = params[:puzzle]
     scramble=0
@@ -46,7 +46,7 @@ class PagesController < ApplicationController
       scramble = Scrambler::ThreeByThree.new.scramble(25);
     end
     respond_to do |format|
-      format.json { render json: {"value" => scramble} }
+      format.json { render json: {"value" => scramble} } #Return a JSON script of the string scramble value
     end
   end
 end

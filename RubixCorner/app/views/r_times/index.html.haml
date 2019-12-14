@@ -1,0 +1,25 @@
+%h1 Listing r_times
+
+%table
+  %thead
+    %tr
+      %th Minutes
+      %th Seconds
+      %th Millisecs
+      %th
+      %th
+      %th
+
+  %tbody
+    - @r_times.each do |r_time|
+      %tr
+        %td= r_time.minutes
+        %td= r_time.seconds
+        %td= r_time.millisecs
+        %td= link_to 'Show', r_time
+        %td= link_to 'Edit', edit_r_time_path(r_time)
+        %td= link_to 'Destroy', r_time, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New R time', new_r_time_path

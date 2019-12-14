@@ -4,12 +4,10 @@ one:
   minutes: 1
   seconds: 1
   millisecs: 1
-  dnf: false
-  plus2: false
+  user_id: 1
 
 two:
   minutes: 1
   seconds: 1
   millisecs: 1
-  dnf: false
-  plus2: false
+  user_id: 2

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Minutes:
+  = @r_time.minutes
+%p
+  %b Seconds:
+  = @r_time.seconds
+%p
+  %b Millisecs:
+  = @r_time.millisecs
+
+= link_to 'Edit', edit_r_time_path(@r_time)
+\|
+= link_to 'Back', r_times_path

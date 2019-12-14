@@ -3,14 +3,14 @@ class RepliesController < ApplicationController
   before_action :set_reply, only: [:edit, :update, :show, :destroy]
   before_action :set_discussion, only: [:create, :edit, :show, :update, :destroy]
 
-  def create
+  def create #  A reply is created for this discussion
     @reply = @discussion.replies.create(params[:reply].permit(:reply, :discussion_id))
     @reply.user_id = current_user.id
 
     respond_to do |format|
       if @reply.save
         format.html { redirect_to discussion_path(@discussion) }
-        format.js # renders create.js.erb
+        format.js # renders create.js.erb # Run an ajax call to prevent page reload
       else
         format.html { redirect_to discussion_path(@discussion), notice: "Reply did not save. Please try again."}
         format.js

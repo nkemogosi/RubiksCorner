@@ -3,24 +3,25 @@ class RTimesController < ApplicationController
 
   # GET /r_times
   # GET /r_times.json
-  def index
+  def index # Create a json script that contains a list of times and the dates they were created in order to render on homepage
     jsonText= "["
     @user_id = current_user.id
-    @r_times = RTime.where('user_id = ?',@user_id).order("created_at asc")
+    @r_times = RTime.where('user_id = ?',@user_id).order("created_at asc") #Geting the times that apply only to that user
     @r_times.each_with_index do |r, index|
       jsonText+='{"minutes": '+ r.minutes.to_s+","
       jsonText+='"seconds": '+ r.seconds.to_s+","
-      jsonText+='"millisecs": '+ r.millisecs.to_s+","
-      jsonText+='"dnf": '+ r.seconds.to_s+","
-      if index < @r_times.size - 1
-        jsonText+='"plus2": '+ r.plus2.to_s+"},"
+      datetime = r.created_at.to_s.split(" ")[0]
+      jsonText+='"datetime": "'+datetime.to_s+'",'
+      if index < @r_times.size - 1  # Ensuring formatting is accurate
+        jsonText+='"millisecs": '+ r.millisecs.to_s+"},"
       else
-        jsonText+='"plus2": '+ r.plus2.to_s+"}"
+        jsonText+='"millisecs": '+ r.millisecs.to_s+"}"
       end
     end
     jsonText += "]"
-    respond_to do |format|
-      format.json { render json: JSON.parse(jsonText) }
+    puts jsonText
+    respond_to do |format| #Return a json response only
+      format.json { render json: jsonText }
     end
   end
 
@@ -37,7 +38,7 @@ class RTimesController < ApplicationController
   # POST /r_times.json
   def create
     @user_id = current_user.id
-    @r_time = RTime.new(user_id: @user_id,minutes:params[:minutes],seconds:params[:seconds],millisecs:params[:millisecs],dnf:params[:dnf],plus2:params[:plus2])
+    @r_time = RTime.new(user_id: @user_id,minutes:params[:minutes],seconds:params[:seconds],millisecs:params[:millisecs])
 
     respond_to do |format|
       if @r_time.save
@@ -81,6 +82,6 @@ class RTimesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def r_time_params
-      params.require(:r_time).permit(:minutes, :seconds, :millisecs, :dnf, :plus2)
+      params.require(:r_time).permit(:minutes, :seconds, :millisecs)
     end
 end

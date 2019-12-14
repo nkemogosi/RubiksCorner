@@ -1,9 +1,11 @@
+
 %p#notice= notice
 
 %p
   %b Channel:
   = @channel.channel_name
-
-= link_to 'Edit', edit_channel_path(@channel)
-\|
+  = render 'shared/discussions'
+-if has_role?(:admin)
+  = link_to 'Edit', edit_channel_path(@channel)
+  \|
 = link_to 'Back', channels_path

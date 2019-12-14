@@ -1,23 +1,26 @@
 %h3= t('discussions.index.title')
 = link_to('New Discussion', new_discussion_path, class:'button')
-.discusions
-  - @discussions.each do |discussion|
-    .col-md
+%br/
+.container-fluid
+  .discusions.col-sm
+    - @discussions.each do |discussion|
       = link_to discussion do
-        %h3.card-title
-          = discussion.title
-    .content
-      = truncate(discussion.content,length: 140)
-      %p
-        %em
-          %small
-            Posted
-            = time_ago_in_words(discussion.created_at)
-            ago in
-            - if discussion.channel
-              = link_to discussion.channel.channel_name, discussion.channel
-            by #{discussion.user.username}
-    - if has_role?(:admin) || post_author(discussion)
-      .col-md
-        = link_to('Edit', edit_discussion_path(discussion), class:'button btn-outline-info')
-        = link_to('Delete', discussion, methtod: :delete, data: {confirm: 'Are you sure you want to do this?'}, class:'button btn-outline-info')
+        .card{:style => "width: 120rem;"}
+          %h3.card-title= discussion.title
+          .card-body
+          .content
+            = truncate(discussion.content,length: 140)
+            %p
+              %em
+                %small
+                  Posted
+                  = time_ago_in_words(discussion.created_at)
+                  ago in
+                  - if discussion.channel
+                    = link_to discussion.channel.channel_name, discussion.channel
+                  by #{discussion.user.username}
+          - if has_role?(:admin) || post_author(discussion)
+            .col-md
+              = link_to('Edit', edit_discussion_path(discussion), class:'button btn-outline-info')
+              = link_to('Delete', discussion, methtod: :delete, data: {confirm: 'Are you sure you want to do this?'}, class:'button btn-outline-info')
+      %br/

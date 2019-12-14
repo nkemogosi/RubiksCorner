@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ChannelsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
     @channel = channels(:one)
   end
@@ -23,6 +24,13 @@ class ChannelsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to channel_url(Channel.last)
   end
 
+  test "should not create channel" do
+    assert_difference('Channel.count') do
+      post channels_url, params: { channel: { channel: @channel.channel_name } }
+    end
+
+    assert_redirected_to channels_url
+  end
   test "should show channel" do
     get channel_url(@channel)
     assert_response :success

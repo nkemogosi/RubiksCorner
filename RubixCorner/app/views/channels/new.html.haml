@@ -1,5 +1,8 @@
-%h1 New channel
+-if has_role?(:admin)
+  %h1 New channel
 
-= render 'form'
+  = render 'form'
 
-= link_to 'Back', channels_path
+  = link_to 'Back', channels_path
+- else
+  %h1= t("access_denied")

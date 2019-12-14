@@ -4,22 +4,24 @@
 //x = event.which || event.keyCode;
 $(document).ready(function() {
   function convertToValue(min,sec,mill){
-    return min*600+sec*100+mill;
+    return min*600+sec*100+mill;  //converting min sec and mill u=into a useful value to calculate with
   }
-  if(readCookie("user_signed_in")!=null){
-    $.ajax({
+  if(readCookie("user_signed_in")!=null){ //Check if user has been signed in
+    $.ajax({ // Calling an ajax get request to get all of the times for the user that is currently logged in
       url: "/r_times",
       type: "GET",
       data: {},
       success: function(data) {
-        data.forEach(function(item,index){
+        data.forEach(function(item,index){ // Looping through the list of JSON objects and adding the values to the table
           let value = convertToValue(parseInt(item.minutes,10),parseInt(item.seconds,10),parseInt(item.millisecs,10));
-          addToTable(value);
+          addToTable(value,item.datetime);
+              calculateStats();
         });
+
 
       },
       error: function(jqXHR, exception) {
-        alert(exception);
+        alert(exception+"y");
       }
 
     });
@@ -38,16 +40,16 @@ $(document).ready(function() {
       delBtn = $(".delBtn"),
       t, dnfBtn = $(".dnfBtn"),
       plus2Btn = $(".plus2Btn"),
-      autostart=0;
-      hideBtns();
+      autostart=0,
+      displayTime = true;
   $(document).keypress(function(e) {
-      if(keyDown){
+      if(keyDown){// Ensures no double presses to reset the stopwatch
         return;
       }
     if(e.keyCode ===32){
       pastTime=$.now();
       keyDown=true;
-      setTimeout(changeColour,timeDelay);
+      setTimeout(changeColour,timeDelay); // Set a time delay
     }
   });
   $(document).keyup(function(e) {
@@ -63,18 +65,17 @@ $(document).ready(function() {
 
             }
 
-          }else{
+          }else{// Stop the stopwatch and save to the database if user is signed in
             if(!stopped){
               clearTimeout(t);
               stopped=true;
-              showBtns();
               save();
             }
           }
       }
   });
   function startStopwatch(){
-   t = setTimeout(add,10)
+   t = setTimeout(add,10) // Calls the add method to counted the elapsed time
   }
   function add() {
         millisecs++;
@@ -86,44 +87,29 @@ $(document).ready(function() {
                 mins++;
             }
         }
+        //Using ternary operators to format the numbers to 00:00:00 format
+        if(displayTime){
         let str = (mins ? (mins > 9 ? mins : "0" + mins) : "00") + ":" + (secs ? (secs > 9 ? secs : "0" + secs) : "00") + ":" + (millisecs > 9 ? millisecs : "0" + millisecs);
-
-        h1.html(str);
-        startStopwatch();
+        h1.html(str); // Display time
+      }else{
+        h1.html(""); //Dont display
+      }
+        startStopwatch(); // Continue stopwatch
     }
   function changeColour(){
     if(keyDown&&$.now()-pastTime>=timeDelay){
       $("body").css("background-color","#00ff00");
     }
   }
-  function resetClock() {
+  function resetClock() { //Reset all the appropriate variables
       millisecs = 0;
       secs  = 0;
       mins=0;
       stopped = true;
       keyDown = false;
       updatePuzzle();
-      hideBtns();
-
-  }
-  function showBtns() {
-      delBtn.show();
-      plus2Btn.show();
-      dnfBtn.show();
-  }
-  function hideBtns() {
-      delBtn.hide();
-      plus2Btn.hide();
-      dnfBtn.hide();
   }
   function save() {
-        if (plus2) {
-          secs+=2;
-        }
-        if (dnf) {
-
-        }
-
         if(readCookie("user_signed_in")!=null){
           $.ajax({
             url: "/r_times",
@@ -142,15 +128,20 @@ $(document).ready(function() {
         calculateStats();
         resetClock();
     }
-  function addToTable(value){
-    var dateT = new Date();
-    var newRow ="<tr data-value=\""+value+"\"><td>"+convertToTime(value)+"</td><td>"+dateT.getFullYear()+"-"+dateT.getMonth()+"-"+dateT.getDay()+"</td></tr>"
+  function addToTable(value, datetime=false){ //Prepending a new row to the times table
+    let newRow = ""
+    if(($.type(datetime) === "boolean")){ // If data has been retrieved from the previous ajax call
+      datetime=new Date();
+      newRow ="<tr data-value=\""+value+"\"><td>"+convertToTime(value)+"</td><td>"+datetime.getFullYear()+"-"+datetime.getMonth()+"-"+datetime.getDay()+"</td></tr>"
+    }else{
+      newRow ="<tr data-value=\""+value+"\"><td>"+convertToTime(value)+"</td><td>"+datetime+"</td></tr>"
+    }
     $("#timeTableBody").prepend(newRow);
   }
-  function updatePuzzle(){
+  function updatePuzzle(){ // call the create_scramble action to generate new scramble
     var size = document.getElementById('puzzleSize').value;
     var puzzle = document.getElementById('puzzle').value;
-    $.ajax({
+    $.ajax({ // post an ajax request to get the scramble
       url: "/create_scramble",
       type: "POST",
       data: {"puzzleSize":size,"puzzle":puzzle},
@@ -164,7 +155,7 @@ $(document).ready(function() {
     });
 
     }
-    function readCookie(name) {
+    function readCookie(name) { // Read cookie
       var cookieName = name + "=";
       var ca = document.cookie.split(';');
       for(var i=0;i < ca.length;i++) {
@@ -174,7 +165,7 @@ $(document).ready(function() {
       }
       return null;
   }
-  function convertToTime(time){
+  function convertToTime(time){ // Convert signle value into its string representation
     var mins=0,secs=0,mills=0;
     mins=Math.floor(time/600);
     time=time-(mins*600);
@@ -183,7 +174,7 @@ $(document).ready(function() {
     mills= Math.floor(time);
     return (mins ? (mins > 9 ? mins : "0" + mins) : "00") + ":" + (secs ? (secs > 9 ? secs : "0" + secs) : "00") + ":" + (mills > 9 ? mills : "0" + mills);
   }
-  function calculateStats(){
+  function calculateStats(){ //calculate stats of the score
     let arrTimes = [];
     //Getting each table row and extracting the data value attribute
     $("#timeTableBody > tr").each(function(index,tr){
@@ -197,7 +188,7 @@ $(document).ready(function() {
     $("#statBest").html(convertToTime(best));
     $("#statWorst").html(convertToTime(worst));
     $("#statAvg").html(convertToTime(avg));
-    if(arrTimes.length>4){
+    if(arrTimes.length>4){ //  Do the calculations for the last 5 values
       let last5Arr= arrTimes.slice(0,4);
       let last5Avg = (last5Arr.reduce((previous, current) => current += previous))/last5Arr.length;
       let best3_5 = Math.min(...last5Arr);
@@ -206,17 +197,7 @@ $(document).ready(function() {
       $("#statAvgLast5").html(convertToTime(last3_5Avg));
       $("#statLast3of5").html(convertToTime(last3_5Avg));
     }
-    if(arrTimes.length>11){
-
-      let last12Arr= arrTimes.slice(0,11);
-      let last12Avg = (last12Arr.reduce((previous, current) => current += previous))/last12Arr.length;
-      let best10_12 = Math.min(...last12Arr);
-      let worst10_12 = Math.max(...last12Arr);
-      let last10_12Avg =(last5Arr.reduce((previous, current) => current += previous))-(best10_12-worst10_12)/last12Arr.length;
-      $("#statAvgLast12").html(convertToTime(last10_12Avg));
-      $("#statLast10of12").html(convertToTime(last10_12Avg));
-    }
-
+    //Find median
     arrTimes.sort((a, b) => a - b);
     let lowMiddle = Math.floor((arrTimes.length - 1) / 2);
     let highMiddle = Math.ceil((arrTimes.length - 1) / 2);

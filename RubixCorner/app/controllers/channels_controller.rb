@@ -4,13 +4,13 @@ class ChannelsController < ApplicationController
   # GET /channels.json
   def index
     @channels = Channel.all
-    @discussions = Discussion.all.order("created_at desc")
+    @discussions = Discussion.all.order("created_at desc") #Sort discussions in chronological order
   end
 
   # GET /channels/1
   # GET /channels/1.json
   def show
-    @discussions = Discussion.where('channel_id = ?',@channel.id)
+    @discussions = Discussion.where('channel_id = ?',@channel.id).order("created_at desc") # Get all Discussions related to this channel
     @channels = Channel.all.order("created_at desc")
   end
 
